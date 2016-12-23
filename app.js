@@ -13,7 +13,7 @@ var port = 5000;
 app.use(express.static('public'));
 
 // setting the views directory
-app.use(express.static('src/views'))
+app.use(express.static('src/views'));
 
 /*
     setting the routes
@@ -21,12 +21,12 @@ app.use(express.static('src/views'))
 // GET route for /
 app.get('/', function(req, res){
     res.send('Hello world');
-})
+});
 
 // GET route for /books
 app.get('/books', function(req, res){
     res.send('Hello books');
-})
+});
 
 // setting express to listen o the specified port
 app.listen(port, function(err){
