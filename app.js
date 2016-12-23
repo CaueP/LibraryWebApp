@@ -13,7 +13,7 @@ var port = 5000;
 app.use(express.static('public'));
 
 // setting the views directory
-app.use(express.static('src/views'));
+app.use(express.static('src/views'))
 
 /*
     setting the routes
