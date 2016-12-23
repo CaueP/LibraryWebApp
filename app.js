@@ -6,6 +6,18 @@ var app = express();
 // listening port
 var port = 5000;
 
+/* 
+    setting up the middleware
+*/
+// setting the public directory
+app.use(express.static('public'));
+
+// setting the views directory
+app.use(express.static('src/views'));
+
+/*
+    setting the routes
+*/
 // GET route for /
 app.get('/', function(req, res){
     res.send('Hello world');
