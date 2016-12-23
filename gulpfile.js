@@ -13,3 +13,20 @@ gulp.task('style', function() {
         }))
         .pipe(jscs());
 });
+
+
+// task to make Bower inject the packages on the HTML
+gulp.task('inject', function() {
+    var wiredep = require('wiredep').stream;
+
+    // options setting what file to look and the directory
+    var options = {
+        bowerJson: require('./bower.json'),
+        directory: './public/lib',
+        ignorePath: '../../public'
+    };
+
+    return gulp.src('./src/views/*.html')
+        .pipe(wiredep(options))
+        .pipe(gulp.dest('./src/views'));
+});
