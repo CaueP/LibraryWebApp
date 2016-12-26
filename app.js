@@ -6,6 +6,21 @@ var app = express();
 // listening port
 var port = process.env.PORT || 5000;
 
+// nav bar items
+var nav = [
+    {
+        Link: '/Books',
+        Text: 'Book'
+    }, {
+        Link: '/Authors',
+        Text: 'Author'
+    }
+];
+
+// importing routes
+// passing nav array of items
+var bookRouter = require('./src/routes/bookRoutes.js')(nav);
+
 /*
     setting up the middleware
 */
@@ -13,18 +28,21 @@ var port = process.env.PORT || 5000;
 app.use(express.static('public'));
 
 // setting the views directory
-//app.use(express.static('src/views'));
 app.set('views', './src/views');
 // setting ejs as the view engine
 app.set('view engine', 'ejs');
 
+app.use('/Books', bookRouter);
 /*
     setting the routes
 */
 // GET route for /
 app.get('/', function (req, res) {
-    // res.send('Hello world');
-    res.render('index', {title: 'Hello from render',lista: ['a', 'b']});
+    // rendering the index page, sending a json with the title and navigation items
+    res.render('index', {
+        title: 'Hello from render',
+        nav: nav
+    });
 });
 
 // GET route for /books
