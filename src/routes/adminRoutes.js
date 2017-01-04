@@ -37,9 +37,6 @@ var router = function() {
                     db.close();
                 });
             });
-
-
-            //res.send('inserting books');
         });
 
     return adminRouter;
