@@ -20,6 +20,7 @@ var nav = [
 // importing routes
 // passing nav array of items
 var bookRouter = require('./src/routes/bookRoutes.js')(nav);
+var adminRouter = require('./src/routes/adminRoutes.js')();
 
 /*
     setting up the middleware
@@ -32,7 +33,10 @@ app.set('views', './src/views');
 // setting ejs as the view engine
 app.set('view engine', 'ejs');
 
+// using the routes
 app.use('/Books', bookRouter);
+app.use('/Admin', adminRouter);
+
 /*
     setting the routes
 */
