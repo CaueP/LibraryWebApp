@@ -7,8 +7,11 @@ var bookRouter = express.Router();
 // function router to receive nav item
 var router = function(nav) {
 
+    // bookService to get information about books
+    var bookService = require('../services/goodreadsService')();
+
     // importing controller
-    var bookController = require('../controllers/bookController')(null, nav);
+    var bookController = require('../controllers/bookController')(bookService, nav);
 
     // secure all the routes, verifying if an user is authenticated before using any book route
     bookRouter.use(bookController.middleware);

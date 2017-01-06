@@ -39,6 +39,21 @@ var router = function() {
             });
         });
 
+    adminRouter.route('/rmBooks')
+        .get(function(req, res) {
+            // mongodb server url
+            var url = 'mongodb://localhost:27017/libraryApp';
+
+            // connect to the database
+            mongodb.connect(url, function(err, db) {
+                var collection = db.collection('books');
+                collection.remove({}, function(err, results) {
+                    res.send(results);
+                    db.close();
+                });
+            });
+        });
+
     return adminRouter;
 };
 

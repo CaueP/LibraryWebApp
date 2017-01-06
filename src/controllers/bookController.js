@@ -43,12 +43,16 @@ var bookController = function(bookService, nav) {
 
             // getting the collection of books and converting to JS array
             collection.findOne({_id: id},
-                function(err, results) {
-                    res.render('bookView', {
-                        title: 'Books',
-                        nav: nav,
-                        book: results
-                    });
+                function(err, results) {    // callback from MongoDB findOne
+                    bookService.getBookById(results.bookId, // calling our bookService
+                        function(err, book) {
+                            results.book = book;    // appending our book description
+                            res.render('bookView', {
+                                title: 'Books',
+                                nav: nav,
+                                book: results
+                            });
+                        });
                 });
         });
     };
