@@ -2,6 +2,12 @@
 var express = require('express');
 // package to parse the body of a request into a JSON object
 var bodyParser = require('body-parser');
+// cookie parser to store user information
+var cookieParser = require ('cookie-parser');
+// authentication library
+var passport = require ('passport');
+// express library to use with passport
+var session = require ('express-session');
 
 // gives an instance of express
 var app = express();
@@ -36,6 +42,15 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded (parse the body into req.body for url encoded)
 app.use(bodyParser.urlencoded({extended: false}));
+// use cookie parser
+app.use(cookieParser());
+// use session
+app.use(session({secret: 'library'}));
+// use passport
+app.use(passport.initialize());
+app.use(passport.session());
+// config passport
+require('./src/config/passport')(app);
 
 // setting the views directory
 app.set('views', './src/views');
@@ -50,6 +65,7 @@ app.use('/Auth', authRouter);
 /*
     setting the routes
 */
+
 // GET route for /
 app.get('/', function (req, res) {
     // rendering the index page, sending a json with the title and navigation items
