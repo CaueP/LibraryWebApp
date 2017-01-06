@@ -42,8 +42,15 @@ var router = function() {
                 res.redirect('/auth/profile');
         });
 
-    // profile route
+    // profile route (secured)
     authRouter.route('/profile')
+        // verify if user is logged in for all methods (post, get...) to secure this route
+        .all(function(req, res, next) {
+            if (!req.user) {
+                res.redirect('/');
+            }
+            next();
+        })
     .get(function(req, res) {
         res.json(req.user);
     });
