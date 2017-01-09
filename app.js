@@ -20,9 +20,6 @@ var nav = [
     {
         Link: '/Books',
         Text: 'Book'
-    }, {
-        Link: '/Authors',
-        Text: 'Author'
     }
 ];
 

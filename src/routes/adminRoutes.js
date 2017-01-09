@@ -6,19 +6,27 @@ var adminRouter = express.Router();
 var books = [
     {
         title: 'War and Peace',
-        author: 'Lev Tolstoy'
+        author: 'Lev Tolstoy',
+        bookId: 656,
+        read: false
     },
     {
-        title: 'Harry Potter 1',
-        author: 'JK Rolling'
+        title: 'The Metamorphosis',
+        author: 'Franz Kafka',
+        bookId: 485894,
+        read: false
     },
     {
-        title: 'Lord of the Rings',
-        author: 'Tolkien'
+        title: 'The Lord of the Rings',
+        author: 'J. R. R. Tolkien',
+        bookId: 33,
+        read: false
     },
     {
         title: 'Memórias Póstumas de Brás Cubas',
-        author: 'Machado de Assis'
+        author: 'Machado de Assis',
+        bookId: 87264,
+        read: false
     }
 ];
 

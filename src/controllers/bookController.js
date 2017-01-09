@@ -4,9 +4,9 @@ var ObjectId = require('mongodb').ObjectID;
 var bookController = function(bookService, nav) {
 
     var middleware = function(req, res, next) {
-        /*if (!req.user) {
+        if (!req.user) {
             res.redirect('/');
-        }*/
+        }
         next();
     };
 
@@ -44,7 +44,8 @@ var bookController = function(bookService, nav) {
             // getting the collection of books and converting to JS array
             collection.findOne({_id: id},
                 function(err, results) {    // callback from MongoDB findOne
-                    bookService.getBookById(results.bookId, // calling our bookService
+                    if (results.bookId) {    // if we have a bookId
+                        bookService.getBookById(results.bookId, // calling our bookService
                         function(err, book) {
                             results.book = book;    // appending our book description
                             res.render('bookView', {
@@ -53,6 +54,13 @@ var bookController = function(bookService, nav) {
                                 book: results
                             });
                         });
+                    } else {    // otherwise, just render
+                        res.render('bookView', {
+                                title: 'Books',
+                                nav: nav,
+                                book: results
+                            });
+                    }
                 });
         });
     };

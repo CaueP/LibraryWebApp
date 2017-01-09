@@ -1,5 +1,6 @@
-# NodeJS - Library
+# NodeJS - Library Web App
 
 ## To start:
 
-Run npm install
+1. Run npm install to instal dependencies
+2. Run gulp serve, to run the starter script
